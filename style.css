@@ -88,6 +88,11 @@ h3 {
   width: 200px;
 }
 
+.duration{
+  display: flex;
+  justify-content:space-between;
+}
+
 .fas {
   font-size: 30px;
   color: rgb(129, 129, 129);

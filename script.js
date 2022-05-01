@@ -128,10 +128,32 @@ function updateProgressBar(e){
     }
 }
 
+//set Progress bar
+function setProgressBar(e){
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const progressPercent = clickX/width;
+    const {duration} = music;
+    const currentMinutes = Math.floor(duration*progressPercent/60);
+    const currentSeconds = Math.floor((duration*progressPercent)%60);
+    let currenttText = '00:00';
+    if (currentSeconds<10){
+        currenttText = `${currentMinutes}:0${currentSeconds}`
+    }else{
+        currenttText = `${currentMinutes}:${currentSeconds}`
+    }
+
+    //Update Progress bar width
+    progress.style.width = `${progressPercent *100}%`;
+    music.currentTime = progressPercent *duration;
+    currentTimeEl.textContent = currenttText;
+}
 
 //event Listener
 
 prevBtn.addEventListener('click',prevSong);
 nextBtn.addEventListener('click',nextSong);
+music.addEventListener('ended',nextSong);
 music.addEventListener('timeupdate',updateProgressBar);
+progressContainer.addEventListener('click',setProgressBar);
 
