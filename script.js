@@ -6,6 +6,8 @@ const artist = document.querySelector('#artist');
 const music = document.querySelector("audio");
 const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current-time');
+const currentDuration = document.getElementById('duration');
 const prevBtn = document.querySelector('#prev');
 const playBtn = document.querySelector('#play');
 const nextBtn = document.querySelector('#next');
@@ -94,6 +96,35 @@ function updateProgressBar(e){
         //Update Progress bar width
         const progressPercent = (currentTime/duration)*100;
         progress.style.width = `${progressPercent}%`;
+        //calculate displat for duration
+        const durationMinutes = parseInt(duration/60);
+        const durationSeconds = parseInt(duration%60);
+        let durationText = '00:00';
+        if (durationSeconds<10){
+            durationText = `${durationMinutes}:0${durationSeconds}`
+        }else{
+            durationText = `${durationMinutes}:${durationSeconds}`
+        }
+        
+        //Evoid NaN
+        if (durationMinutes){
+            currentDuration.textContent = durationText;
+        }
+
+        //calculate displat for current time
+        const currentMinutes = parseInt(currentTime/60);
+        const currentSeconds = parseInt(currentTime%60);
+        let currenttText = '00:00';
+        if (currentSeconds<10){
+            currenttText = `${currentMinutes}:0${currentSeconds}`
+        }else{
+            currenttText = `${currentMinutes}:${currentSeconds}`
+        }
+
+        //Evoid NaN
+        if (currentSeconds){
+            currentTimeEl.textContent = currenttText;
+        }
     }
 }
 
